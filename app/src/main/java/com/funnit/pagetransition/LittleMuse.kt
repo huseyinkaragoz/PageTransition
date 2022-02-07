@@ -1,6 +1,5 @@
 package com.funnit.pagetransition
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -65,19 +64,29 @@ fun LetInspire(navController: NavController) {
                     textAlign = TextAlign.Center
                 )
 
-                Button(onClick = { navController.navigate("FoodRecipe")},
+                Button(
+                    onClick = {
+                        navController.navigate("FoodRecipe") {
+                            popUpTo("LittleMuse") {
+                                inclusive = true
+                            }
+                        }
+                    },
                     colors = ButtonDefaults.buttonColors(
-                        backgroundColor = colorResource( id = R.color.amber),
+                        backgroundColor = colorResource(id = R.color.amber),
                         contentColor = colorResource(id = R.color.secondary_text)
-                    )) {
+                    )
+                ) {
                     Text(text = stringResource(id = R.string.let_inspire))
                 }
 
-                Button(onClick = { navController.popBackStack()},
+                Button(
+                    onClick = { navController.popBackStack() },
                     colors = ButtonDefaults.buttonColors(
-                        backgroundColor = colorResource( id = R.color.dark_amber),
+                        backgroundColor = colorResource(id = R.color.dark_amber),
                         contentColor = colorResource(id = R.color.primary_color)
-                    )) {
+                    )
+                ) {
                     Text(text = stringResource(id = R.string.main_page))
                 }
             }
