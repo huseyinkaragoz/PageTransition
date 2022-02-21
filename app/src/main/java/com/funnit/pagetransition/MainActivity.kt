@@ -22,6 +22,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.funnit.pagetransition.ui.theme.PageTransitionTheme
+import com.google.gson.Gson
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,14 +53,13 @@ fun PageTransitions() {
         composable("MainActivity") {
             MainPage(navController = navController)
         }
-        composable("LittleMuse/{person}/{quote}",
+        composable("LittleMuse/{muse}",
             arguments = listOf(
-                navArgument("person"){type = NavType.StringType},
-                navArgument("quote"){type = NavType.StringType}
+                navArgument("muse") { type = NavType.StringType }
             )) {
-            val person = it.arguments?.getString("person")!!
-            val quote = it.arguments?.getString("quote")!!
-            LetInspire(navController = navController, person,quote)
+            val json = it.arguments?.getString("muse")
+            val muse = Gson().fromJson(json, Muse::class.java)
+            LetInspire(navController = navController, muse)
         }
         composable("FoodRecipe") {
             RecipeScreen()
@@ -82,9 +82,14 @@ fun MainPage(navController: NavController) {
         Text(text = "Main Page", fontSize = 36.sp)
 
         Button(onClick = {
+
             val p = "Steve Jobs"
-            val q = "Dünyayı değiştirecek insanlar, onu değiştirebileceklerini düşünecek kadar çılgın olanlardır."
-            navController.navigate("LittleMuse/$p/$q") }) {
+            val q =
+                "Dünyayı değiştirecek insanlar, onu değiştirebileceklerini düşünecek kadar çılgın olanlardır."
+            val theMuse = Muse(p, q)
+            val theMuseString = Gson().toJson(theMuse)
+            navController.navigate("LittleMuse/$theMuseString")
+        }) {
             Text(text = stringResource(id = R.string.little_muse), fontSize = 16.sp)
         }
 

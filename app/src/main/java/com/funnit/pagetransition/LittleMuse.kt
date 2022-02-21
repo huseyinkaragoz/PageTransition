@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
 @Composable
-fun LetInspire(navController: NavController,person:String,quote:String) {
+fun LetInspire(navController: NavController, theMuse: Muse) {
 
     Scaffold(
         topBar = {
@@ -52,9 +52,8 @@ fun LetInspire(navController: NavController,person:String,quote:String) {
                         fontSize = 36.sp
                     )
                 }
-//"Dünyayı değiştirecek insanlar, onu değiştirebileceklerini düşünecek kadar çılgın olanlardır."
                 Text(
-                    text = quote,
+                    text = theMuse.quote,
                     modifier = Modifier.padding(8.dp),
                     color = colorResource(
                         id = R.color.primary_text
@@ -65,7 +64,7 @@ fun LetInspire(navController: NavController,person:String,quote:String) {
                 )
 
                 Text(
-                    text = person,
+                    text = theMuse.person,
                     modifier = Modifier.padding(8.dp),
                     color = colorResource(
                         id = R.color.dark_amber
