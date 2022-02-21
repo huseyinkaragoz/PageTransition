@@ -16,9 +16,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.funnit.pagetransition.ui.theme.PageTransitionTheme
 
 class MainActivity : ComponentActivity() {
@@ -50,8 +52,14 @@ fun PageTransitions() {
         composable("MainActivity") {
             MainPage(navController = navController)
         }
-        composable("LittleMuse") {
-            LetInspire(navController = navController)
+        composable("LittleMuse/{person}/{quote}",
+            arguments = listOf(
+                navArgument("person"){type = NavType.StringType},
+                navArgument("quote"){type = NavType.StringType}
+            )) {
+            val person = it.arguments?.getString("person")!!
+            val quote = it.arguments?.getString("quote")!!
+            LetInspire(navController = navController, person,quote)
         }
         composable("FoodRecipe") {
             RecipeScreen()
@@ -73,7 +81,10 @@ fun MainPage(navController: NavController) {
     ) {
         Text(text = "Main Page", fontSize = 36.sp)
 
-        Button(onClick = { navController.navigate("LittleMuse") }) {
+        Button(onClick = {
+            val p = "Steve Jobs"
+            val q = "Dünyayı değiştirecek insanlar, onu değiştirebileceklerini düşünecek kadar çılgın olanlardır."
+            navController.navigate("LittleMuse/$p/$q") }) {
             Text(text = stringResource(id = R.string.little_muse), fontSize = 16.sp)
         }
 
