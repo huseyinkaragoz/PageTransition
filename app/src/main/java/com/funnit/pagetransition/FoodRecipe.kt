@@ -1,12 +1,15 @@
 package com.funnit.pagetransition
 
+import android.app.Activity
 import android.util.Log
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -89,10 +92,16 @@ fun RecipeScreen() {
                         color = colorResource(id = R.color.secondary_text),
                         fontFamily = FontFamily.Monospace
                     )
+                    val activity = (LocalContext.current as Activity)
+                    BackHandler(onBack = {
+                        activity.finish()
+
+                    })
                 }
             }
 
         }
+
     )
 }
 
