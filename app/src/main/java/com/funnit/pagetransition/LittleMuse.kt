@@ -1,5 +1,6 @@
 package com.funnit.pagetransition
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -7,6 +8,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -103,5 +107,20 @@ fun LetInspire(navController: NavController, theMuse: Muse) {
 
         }
     )
+
+    LaunchedEffect(key1 = true) {
+        Log.e("LittleMuse", "LaunchEffect Run!!!")
+    }
+
+
+    SideEffect {
+        Log.e("LittleMuse", "SideEffect Run!!!")
+    }
+
+    DisposableEffect(Unit) {
+        onDispose {
+            Log.e("LittleMuse", "DisposableEffect onDispose() Run!!!")
+        }
+    }
 
 }

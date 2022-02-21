@@ -1,13 +1,12 @@
 package com.funnit.pagetransition
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -123,6 +122,21 @@ fun MainPage(navController: NavController) {
         }
 
 
+    }
+
+    LaunchedEffect(key1 = true) {
+        Log.e("MainActivity", "LaunchEffect Run!!!")
+    }
+
+
+    SideEffect {
+        Log.e("MainActivity", "SideEffect Run!!!")
+    }
+
+    DisposableEffect(Unit) {
+        onDispose {
+            Log.e("MainActivity", "DisposableEffect onDispose() Run!!!")
+        }
     }
 }
 

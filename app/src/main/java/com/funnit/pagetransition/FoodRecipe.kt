@@ -7,6 +7,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -103,6 +106,21 @@ fun RecipeScreen() {
         }
 
     )
+
+    LaunchedEffect(key1 = true) {
+        Log.e("FoodRecipe", "LaunchEffect Run!!!")
+    }
+
+
+    SideEffect {
+        Log.e("FoodRecipe", "SideEffect Run!!!")
+    }
+
+    DisposableEffect(Unit) {
+        onDispose {
+            Log.e("FoodRecipe", "DisposableEffect onDispose() Run!!!")
+        }
+    }
 }
 
 @Composable
